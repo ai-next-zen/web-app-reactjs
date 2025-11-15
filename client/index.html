@@ -53,10 +53,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script type="module">
+      // Inject analytics script only when env vars are provided at build time.
+      const _umami_endpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+      const _umami_id = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+      if (_umami_endpoint && _umami_id) {
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = `${_umami_endpoint.replace(/\/$/, '')}/umami`;
+        s.setAttribute('data-website-id', _umami_id);
+        document.body.appendChild(s);
+      }
+    </script>
   </body>
 
 </html>
