@@ -8,6 +8,9 @@ import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 const plugins = [react(), tailwindcss(), vitePluginManusRuntime()];
 
 export default defineConfig({
+  // Base must match the GitHub Pages repo name when deploying to GitHub Pages
+  // so assets are loaded from /web-app-reactjs/ rather than '/'.
+  base: '/web-app-reactjs/',
   plugins,
   resolve: {
     alias: {

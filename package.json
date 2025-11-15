@@ -6,7 +6,8 @@
   "homepage": "https://ai-next-zen.github.io/web-app-reactjs/",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+  "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+  "postbuild": "cp -a dist/public/index.html dist/public/404.html || true",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
